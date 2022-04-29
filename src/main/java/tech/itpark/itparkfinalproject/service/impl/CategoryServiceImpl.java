@@ -8,6 +8,7 @@ import tech.itpark.itparkfinalproject.mapper.CategoryMapper;
 import tech.itpark.itparkfinalproject.repository.CategoryRepo;
 import tech.itpark.itparkfinalproject.service.CategoryService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -27,5 +28,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Optional<CategoryDto> findById(String id) {
         return mapper.toOptionalDto(repo.findById(id));
+    }
+
+    @Override
+    public List<CategoryDto> findAll() {
+        return mapper.toDtos(repo.findAll());
     }
 }

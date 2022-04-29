@@ -6,9 +6,11 @@ import org.mapstruct.Mappings;
 import tech.itpark.itparkfinalproject.dto.CategoryDto;
 import tech.itpark.itparkfinalproject.model.Category;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-@Mapper
+@Mapper(uses = ProductMapper.class)
 public interface CategoryMapper {
 
     @Mappings({
@@ -33,6 +35,10 @@ public interface CategoryMapper {
 
     default Optional<CategoryDto> toOptionalDto(Optional<Category> entity){
         return entity.map(this::toDto);
+    }
+
+    default List<CategoryDto> toDtos(List<Category> entities) {
+        return entities.stream().map(this::toDto).collect(Collectors.toList());
     }
 
 }

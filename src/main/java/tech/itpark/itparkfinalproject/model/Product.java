@@ -2,6 +2,7 @@ package tech.itpark.itparkfinalproject.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -21,6 +22,7 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(exclude = "categoryTable")
 public class Product {
 
     @Id
@@ -55,4 +57,5 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category categoryTable;
+
 }

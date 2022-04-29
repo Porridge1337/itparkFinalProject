@@ -2,6 +2,7 @@ package tech.itpark.itparkfinalproject.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,9 +20,10 @@ import java.util.Set;
 
 @Entity
 @Table(schema = "storage", name = "category_table")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@EqualsAndHashCode(exclude = "productTable")
 public class Category {
 
     @Id
@@ -51,4 +53,5 @@ public class Category {
 
     @OneToMany(mappedBy = "categoryTable", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Product> productTable;
+
 }
