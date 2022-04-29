@@ -18,7 +18,9 @@ public class ItParkFinalProjectApplication {
         CategoryService service = run.getBean(CategoryService.class);
         ProductService productService = run.getBean(ProductService.class);
 
-        System.out.println(service.findAll());
+        /*System.out.println(service.findAll());
+        System.out.println("--------------------------");
+        System.out.println(service.findById("9f1d52ad-21b2-4736-9945-b11309e72268"));*/
 
     }
 
