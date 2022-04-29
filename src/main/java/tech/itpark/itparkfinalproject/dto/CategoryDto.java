@@ -28,4 +28,10 @@ public class CategoryDto {
 
     private Set<ProductDto> productTable;
 
+    public String getIdStr(){
+        {
+            return String.format("category_%s", id);
+        }
+    }
+
 }

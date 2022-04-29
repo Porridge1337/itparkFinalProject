@@ -1,14 +1,17 @@
 package tech.itpark.itparkfinalproject.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.itpark.itparkfinalproject.dto.CategoryDto;
+import tech.itpark.itparkfinalproject.dto.pagination.CategoryPageDto;
 import tech.itpark.itparkfinalproject.mapper.CategoryMapper;
+import tech.itpark.itparkfinalproject.model.Category;
 import tech.itpark.itparkfinalproject.repository.CategoryRepo;
 import tech.itpark.itparkfinalproject.service.CategoryService;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -20,9 +23,13 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryMapper mapper;
 
     @Override
-    @Transactional
-    public CategoryDto save(CategoryDto table) {
-        return mapper.toDto(repo.save(mapper.toEntity(table)));
+    public CategoryPageDto getPage(Pageable pageable) {
+        Page<Category> categoryPage = repo.findAll(pageable);
+        return new CategoryPageDto(mapper.toDtos(categoryPage.getContent()),
+                categoryPage.getNumber(),
+                categoryPage.getTotalPages(),
+                categoryPage.hasNext(),
+                categoryPage.hasPrevious());
     }
 
     @Override
@@ -31,7 +38,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDto> findAll() {
-        return mapper.toDtos(repo.findAll());
+    @Transactional
+    public CategoryDto save(CategoryDto table) {
+        return mapper.toDto(repo.save(mapper.toEntity(table)));
     }
+
+    @Override
+    @Transactional
+    public void delete(String id) {
+        repo.deleteById(id);
+    }
+
 }

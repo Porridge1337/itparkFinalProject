@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Category</title>
+    <script src="/webjars/jquery/3.6.0/jquery.js"></script>
+    <script>
+        $(function (){
+            $("a[id^='category_']").click(function (event) {
+                if (confirm('Are you sure to delete this genre?')) {
+                    let categoryCode = $(this).attr('name').replace('category_', '');
+                    $.ajax({
+                        url: '/api/delete/' + categoryCode,
+                        type: 'DELETE',
+                        success: function () {
+                            console.log(categoryCode);
+                            location.reload();
+                        },
+                    });
+                }
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Название категории</th>
+                <th>Колличество</th>
+                <th>Изображение</th>
+                <th>Описание</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cat: ${category.data}">
+                <td th:text="${cat.getCategoryName()}">Имя</td>
+                <td th:text="${cat.getAmount()}">Кол-во</td>
+                <td th:text="${cat.getPicture()}">Пик</td>
+                <td th:text="${cat.getDescription()}">Дискриптион</td>
+                <td>
+                    <a th:href="@{/category/{id}(id = ${cat.getId()})}">Обновить</a>
+                    <a th:id="${cat.idStr}" th:name="${cat.idStr}" th:href="@{/categories(page=${category.currentPage})}">Удалить</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <a th:href="@{/category/create}">Добавить новую категорию</a>
+    </div>
+</body>
+</html>

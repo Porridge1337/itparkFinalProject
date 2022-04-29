@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create or Update</title>
+</head>
+<body>
+    <form th:method="POST" th:action="@{/category/save}" th:if="${category == null}" >
+        <div >
+            <label for="name-of-category">Имя категории:</label>
+            <input id="name-of-category" name="categoryName" type="text">
+        </div>
+        <div >
+            <label for="amount-of-category">Колличество</label>
+            <input id="amount-of-category" name="amount" type="text">
+        </div>
+        <div >
+            <label for="pic-of-category">Выбор изображения</label>
+            <input id="pic-of-category" name="picture" type="text" >
+        </div>
+        <div>
+            <label for="description-of-category">Описание</label>
+            <textarea id="description-of-category" name="description"></textarea>
+        </div>
+        <div>
+            <a th:href="@{/categories}">Назад</a>
+            <button type="submit">Сохранить</button>
+        </div>
+    </form>
+    <form th:method="PATCH" th:action="@{/category/save}" th:unless="${category == null}" >
+        <div>
+            <label for="id-of-category">Имя категории:</label>
+            <input id="id-of-category" th:field="${category.id}" readonly="readonly">
+        </div>
+        <div>
+            <label for="name-of-category">Имя категории:</label>
+            <input id="name-of-category" th:field="${category.categoryName}" type="text">
+        </div>
+        <div >
+            <label for="amount-of-category">Колличество</label>
+            <input id="amount-of-category" th:field="${category.amount}" type="text">
+        </div>
+        <div >
+            <label for="pic-of-category">Выбор изображения</label>
+            <input id="pic-of-category" th:field="${category.picture}" type="text" >
+        </div>
+        <div>
+            <label for="description-of-category">Описание</label>
+            <textarea id="description-of-category" th:field="${category.description}"></textarea>
+        </div>
+        <div>
+            <a th:href="@{/categories}">Назад</a>
+            <button type="submit">Сохранить</button>
+        </div>
+    </form>
+
+</body>
+</html>
