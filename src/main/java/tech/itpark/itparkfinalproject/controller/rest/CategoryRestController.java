@@ -22,5 +22,4 @@ public class CategoryRestController {
         return ResponseEntity.ok(new ResultDto());
     }
 
-
 }

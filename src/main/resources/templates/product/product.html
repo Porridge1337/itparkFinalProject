@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <script src="/webjars/jquery/3.6.0/jquery.js"></script>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Название продукта</th>
+        <th>Цена</th>
+        <th>Колличество</th>
+        <th>Изображение</th>
+        <th>Описание</th>
+        <th>Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="prod:${products.data}">
+        <td th:text="${prod.productName}">Имя</td>
+        <td th:text="${prod.price}">цена</td>
+        <td th:text="${prod.amount}">кол-во</td>
+        <td th:text="${prod.picture}">пик</td>
+        <td th:text="${prod.description}">описание</td>
+        <td>
+            <a>Обновить</a>
+            <a>Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

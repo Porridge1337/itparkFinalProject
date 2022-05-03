@@ -29,8 +29,7 @@
     </form>
     <form th:method="PATCH" th:action="@{/category/save}" th:unless="${category == null}" >
         <div>
-            <label for="id-of-category">Имя категории:</label>
-            <input id="id-of-category" th:field="${category.id}" readonly="readonly">
+            <input id="id-of-category" th:field="${category.id}" readonly="readonly" type="hidden">
         </div>
         <div>
             <label for="name-of-category">Имя категории:</label>

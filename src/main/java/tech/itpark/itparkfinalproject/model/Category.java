@@ -36,7 +36,7 @@ public class Category {
     @NotNull
     private String id;
 
-    @Column(name = "category_name")
+    @Column(name = "category_name", unique = true)
     @NotNull
     private String categoryName;
 

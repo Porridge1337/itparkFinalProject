@@ -36,7 +36,11 @@
         </thead>
         <tbody>
             <tr th:each="cat: ${category.data}">
-                <td th:text="${cat.getCategoryName()}">Имя</td>
+                <td >
+                    <a th:href="@{/category/{categoryName}/{id}(categoryName=${cat.getCategoryName()}, id=${cat.getId()})}" >
+                        <span th:text="${cat.getCategoryName()}">Имя</span>
+                    </a>
+                </td>
                 <td th:text="${cat.getAmount()}">Кол-во</td>
                 <td th:text="${cat.getPicture()}">Пик</td>
                 <td th:text="${cat.getDescription()}">Дискриптион</td>
