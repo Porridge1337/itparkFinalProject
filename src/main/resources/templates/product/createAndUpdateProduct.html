@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create or update product</title>
+</head>
+<body>
+<form th:method="POST"  th:if="${product == null}" >
+    <div>
+    </div>
+    <div>
+        <label for="name-of-product">Имя продукта:</label>
+        <input id="name-of-product" name="productName" type="text">
+    </div>
+    <div>
+        <label for="price-of-product">Цена</label>
+        <input id="price-of-product" name="price" type="text">
+    </div>
+    <div >
+        <label for="amount-of-product">Колличество</label>
+        <input id="amount-of-product" name ="amount" type="text">
+    </div>
+    <div >
+        <label for="pic-of-product">Выбор изображения</label>
+        <input id="pic-of-product" name="picture" type="text" >
+    </div>
+    <div>
+        <label for="description-of-product">Описание</label>
+        <textarea id="description-of-product" name="description"></textarea>
+    </div>
+    <div>
+        <a>Назад</a>
+        <button type="submit">Сохранить</button>
+    </div>
+</form>
+    <form th:method="PATCH"  th:unless="${product == null}" >
+        <div>
+
+        </div>
+        <div>
+            <label for="name-of-product">Имя продукта:</label>
+            <input id="name-of-product" th:field="${product.productName}" type="text">
+        </div>
+        <div>
+        <label for="price-of-product">Цена</label>
+        <input id="price-of-product" th:field="${product.price}" type="text">
+        </div>
+        <div >
+            <label for="amount-of-product">Колличество</label>
+            <input id="amount-of-product" th:field="${product.amount}" type="text">
+        </div>
+        <div >
+            <label for="pic-of-product">Выбор изображения</label>
+            <input id="pic-of-product" th:field="${product.picture}" type="text" >
+        </div>
+        <div>
+            <label for="description-of-product">Описание</label>
+            <textarea id="description-of-product" th:field="${product.description}"></textarea>
+        </div>
+        <div>
+            <a>Назад</a>
+            <button type="submit">Сохранить</button>
+        </div>
+    </form>
+</body>
+</html>

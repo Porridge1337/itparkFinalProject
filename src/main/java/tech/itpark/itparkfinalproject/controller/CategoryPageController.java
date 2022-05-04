@@ -37,13 +37,13 @@ public class CategoryPageController {
         return "category/category";
     }
 
-    @GetMapping("/category/{categoryName}/{id}")
+    @GetMapping("/category/{categoryName}/{idCategory}")
     public String getProductsByCategory(@PathVariable String categoryName,
-                                        @PathVariable String id,
+                                        @PathVariable String idCategory,
                                         @PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer page,
                                         @Positive @RequestParam(required = false, defaultValue = "5") Integer size,
                                         Model model) {
-        ProductPageDto pageDto = productService.getPageByCategoryId(id, PageRequest.of(page, size));
+        ProductPageDto pageDto = productService.getPageByCategoryId(idCategory, PageRequest.of(page, size));
         model.addAttribute("products", pageDto);
         return "/product/product";
     }

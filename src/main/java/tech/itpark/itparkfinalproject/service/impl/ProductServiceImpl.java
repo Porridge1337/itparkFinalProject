@@ -36,6 +36,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductPageDto getPage(Pageable pageable) {
+        Page<Product> productPage = repo.findAll(pageable);
+        return new ProductPageDto(mapper.toDtos(productPage.getContent()),
+                productPage.getNumber(),
+                productPage.getTotalPages(),
+                productPage.hasNext(),
+                productPage.hasPrevious());
+    }
+
+    @Override
     @Transactional
     public ProductDto save(ProductDto productDto) {
         return mapper.toDto(repo.save(mapper.toEntity(productDto)));
@@ -44,10 +54,5 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Optional<ProductDto> findById(String id) {
         return mapper.toOptionalDto(repo.findById(id));
-    }
-
-    @Override
-    public List<ProductDto> findAll() {
-        return mapper.toDtos(repo.findAll());
     }
 }
