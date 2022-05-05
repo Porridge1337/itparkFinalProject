@@ -23,7 +23,6 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductMapper mapper;
-    private final CategoryMapper categoryMapper;
     private final ProductRepo repo;
     private final CategoryRepo categoryRepo;
 
