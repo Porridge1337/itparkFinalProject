@@ -13,27 +13,27 @@ import java.util.stream.Collectors;
 @Mapper(uses = ProductMapper.class)
 public interface CategoryMapper {
 
-    @Mappings({
-            @Mapping(target = "id", source = "entity.id"),
-            @Mapping(target = "categoryName", source = "entity.categoryName"),
-            @Mapping(target = "amount", source = "entity.amount"),
-            @Mapping(target = "picture", source = "entity.picture"),
-            @Mapping(target = "description", source = "entity.description"),
-            @Mapping(target = "productTable", source = "entity.productTable")
-    })
+   // @Mappings({
+            @Mapping(target = "id", source = "entity.id")
+            @Mapping(target = "categoryName", source = "entity.categoryName")
+            @Mapping(target = "amount", source = "entity.amount")
+            @Mapping(target = "picture", source = "entity.picture")
+            @Mapping(target = "description", source = "entity.description")
+            @Mapping(target = "productTable", source = "entity.productTable"/*, qualifiedByName = "productTableDtoList"*/)
+    //})
     CategoryDto toDto(Category entity);
 
-    @Mappings({
-            @Mapping(target = "id", source = "dto.id"),
-            @Mapping(target = "categoryName", source = "dto.categoryName"),
-            @Mapping(target = "amount", source = "dto.amount"),
-            @Mapping(target = "picture", source = "dto.picture"),
-            @Mapping(target = "description", source = "dto.description"),
-            @Mapping(target = "productTable", source = "dto.productTable")
-    })
+    //@Mappings({
+            @Mapping(target = "id", source = "dto.id")
+            @Mapping(target = "categoryName", source = "dto.categoryName")
+            @Mapping(target = "amount", source = "dto.amount")
+            @Mapping(target = "picture", source = "dto.picture")
+            @Mapping(target = "description", source = "dto.description")
+            @Mapping(target = "productTable", source = "dto.productTable"/*, qualifiedByName = "productTableEntityList"*/)
+    //})
     Category toEntity(CategoryDto dto);
 
-    default Optional<CategoryDto> toOptionalDto(Optional<Category> entity){
+    default Optional<CategoryDto> toOptionalDto(Optional<Category> entity) {
         return entity.map(this::toDto);
     }
 

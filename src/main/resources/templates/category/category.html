@@ -10,7 +10,7 @@
                 if (confirm('Are you sure to delete this genre?')) {
                     let categoryCode = $(this).attr('name').replace('category_', '');
                     $.ajax({
-                        url: '/api/delete/' + categoryCode,
+                        url: '/api/category/delete/' + categoryCode,
                         type: 'DELETE',
                         success: function () {
                             console.log(categoryCode);

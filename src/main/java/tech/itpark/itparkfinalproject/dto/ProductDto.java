@@ -30,4 +30,10 @@ public class ProductDto {
     private String description;
 
     private CategoryDto categoryTable;
+
+    public String getIdStr(){
+        {
+            return String.format("product_%s", id);
+        }
+    }
 }

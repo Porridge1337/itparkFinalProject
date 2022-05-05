@@ -10,7 +10,7 @@ import tech.itpark.itparkfinalproject.dto.ResultDto;
 import tech.itpark.itparkfinalproject.service.CategoryService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/category")
 @RequiredArgsConstructor
 public class CategoryRestController {
 

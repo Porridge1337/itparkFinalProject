@@ -2,7 +2,6 @@ package tech.itpark.itparkfinalproject.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import tech.itpark.itparkfinalproject.dto.CategoryDto;
-import tech.itpark.itparkfinalproject.dto.ProductDto;
 import tech.itpark.itparkfinalproject.dto.pagination.CategoryPageDto;
 import tech.itpark.itparkfinalproject.dto.pagination.ProductPageDto;
 import tech.itpark.itparkfinalproject.service.CategoryService;
@@ -26,7 +24,6 @@ import javax.validation.constraints.PositiveOrZero;
 public class CategoryPageController {
 
     private final CategoryService categoryService;
-    private final ProductService productService;
 
     @GetMapping("/categories")
     public String getCategoryPage(@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -35,17 +32,6 @@ public class CategoryPageController {
         CategoryPageDto categoryPageDto = categoryService.getPage(PageRequest.of(page, size));
         model.addAttribute("category", categoryPageDto);
         return "category/category";
-    }
-
-    @GetMapping("/category/{categoryName}/{idCategory}")
-    public String getProductsByCategory(@PathVariable String categoryName,
-                                        @PathVariable String idCategory,
-                                        @PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer page,
-                                        @Positive @RequestParam(required = false, defaultValue = "5") Integer size,
-                                        Model model) {
-        ProductPageDto pageDto = productService.getPageByCategoryId(idCategory, PageRequest.of(page, size));
-        model.addAttribute("products", pageDto);
-        return "/product/product";
     }
 
     @GetMapping("/category/create")

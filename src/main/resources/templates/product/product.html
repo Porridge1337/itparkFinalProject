@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <title>Product</title>
     <script src="/webjars/jquery/3.6.0/jquery.js"></script>
+    <script>
+        $(function (){
+            $("a[id^='product_']").click(function (event) {
+                if (confirm('Are you sure to delete this genre?')) {
+                    let productCode = $(this).attr('name').replace('product_', '');
+                    $.ajax({
+                        url: '/api/product/delete/' + productCode,
+                        type: 'DELETE',
+                        success: function () {
+                            console.log(productCode);
+                            location.reload();
+                        },
+                    });
+                }
+                event.preventDefault();
+            });
+        });
+    </script>
 </head>
 <body>
 <table>
@@ -25,8 +43,10 @@
         <td th:text="${prod.picture}">пик</td>
         <td th:text="${prod.description}">описание</td>
         <td>
-            <a >Обновить</a>
-            <a>Удалить</a>
+            <a th:href="@{/category/{categoryName}/{idCategory}/{product}/{idProduct}(categoryName=${categoryName},
+            idCategory=${idCategory},product=${prod.getProductName()},idProduct=${prod.getId()})}">Обновить</a>
+            <a th:id="${prod.idStr}" th:name="${prod.idStr}" th:href="@{/category/{categoryName}/{idCategory}(categoryName=${categoryName},
+            idCategory=${idCategory}, page=${products.getCurrentPage()})}">Удалить</a>
         </td>
     </tr>
     </tbody>

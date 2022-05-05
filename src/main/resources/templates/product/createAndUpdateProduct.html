@@ -5,7 +5,8 @@
     <title>Create or update product</title>
 </head>
 <body>
-<form th:method="POST"  th:if="${product == null}" >
+<form th:method="POST" th:action="@{/category/{categoryName}/{idCategory}/save
+    (categoryName=${categoryName},idCategory=${idCategory})}"  th:if="${product == null}" >
     <div>
     </div>
     <div>
@@ -33,9 +34,10 @@
         <button type="submit">Сохранить</button>
     </div>
 </form>
-    <form th:method="PATCH"  th:unless="${product == null}" >
+    <form th:method="PATCH" th:action="@{/category/{categoryName}/{idCategory}/save
+    (categoryName=${categoryName},idCategory=${idCategory})}" th:unless="${product == null}" >
         <div>
-
+            <input id="id-of-product" th:field="${product.id}" readonly="readonly" type="hidden">
         </div>
         <div>
             <label for="name-of-product">Имя продукта:</label>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import tech.itpark.itparkfinalproject.dto.ProductDto;
 import tech.itpark.itparkfinalproject.dto.pagination.ProductPageDto;
@@ -20,17 +21,22 @@ public class ProductPageController {
 
     private final ProductService productService;
 
-    @GetMapping("/categories/products")
-    public String getProductPage(@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer page,
-                                 @Positive @RequestParam(required = false, defaultValue = "5") Integer size,
-                                 Model model){
-        ProductPageDto pageDto = productService.getPage(PageRequest.of(page, size));
+    @GetMapping("/category/{categoryName}/{idCategory}")
+    public String getProductsByCategory(@PathVariable String categoryName,
+                                        @PathVariable String idCategory,
+                                        @PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer page,
+                                        @Positive @RequestParam(required = false, defaultValue = "5") Integer size,
+                                        Model model) {
+        ProductPageDto pageDto = productService.getPageByCategoryId(idCategory, PageRequest.of(page, size));
         model.addAttribute("products", pageDto);
-        return "product/product";
+        model.addAttribute("categoryName", categoryName);
+        model.addAttribute("idCategory", idCategory);
+        return "/product/product";
     }
 
-    @GetMapping("/categories/products/create")
-    public String getProductPageCreate(){
+    @GetMapping("/category/{categoryName}/{idCategory}/create")
+    public String getProductPageCreate(@PathVariable String categoryName,
+                                       @PathVariable String idCategory) {
         return "product/createAndUpdateProduct";
     }
 
@@ -39,11 +45,21 @@ public class ProductPageController {
                                  @PathVariable String idCategory,
                                  @PathVariable String product,
                                  @PathVariable String idProduct,
-                                 Model model){
+                                 Model model) {
         ProductDto productDto = productService.findById(idProduct)
                 .orElseThrow(() -> new IllegalArgumentException("Non existed product"));
         model.addAttribute("product", productDto);
+        model.addAttribute("categoryName", categoryName);
+        model.addAttribute("idCategory", idCategory);
         return "product/createAndUpdateProduct";
+    }
+
+    @PostMapping("/category/{categoryName}/{idCategory}/save")
+    public String save(ProductDto productDto,
+                       @PathVariable String categoryName,
+                       @PathVariable String idCategory) {
+        productService.save(productDto, idCategory);
+        return "redirect:/category/{categoryName}/{idCategory}";
     }
 
 }
