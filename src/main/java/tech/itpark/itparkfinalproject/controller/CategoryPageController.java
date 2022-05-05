@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import tech.itpark.itparkfinalproject.dto.CategoryDto;
 import tech.itpark.itparkfinalproject.dto.pagination.CategoryPageDto;
-import tech.itpark.itparkfinalproject.dto.pagination.ProductPageDto;
 import tech.itpark.itparkfinalproject.service.CategoryService;
-import tech.itpark.itparkfinalproject.service.ProductService;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
