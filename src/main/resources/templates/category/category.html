@@ -55,5 +55,25 @@
     <div>
         <a th:href="@{/category/create}">Добавить новую категорию</a>
     </div>
+    <div>
+        <div>
+            <a th:if="${category.hasPrevious}" th:href="@{/categories(page=${category.currentPage})}">
+                Previous
+            </a>
+            <span th:unless="${category.hasPrevious}">
+                Previous
+            </span>
+            <span th:each="i: ${#numbers.sequence(1, category.totalPage)}">
+                <a th:if="${i!=category.currentPage + 1}" th:href="@{/categories(page=${i})}" th:text="${i}">Номера страниц для перехода</a>
+                <span th:if="${i==category.currentPage + 1}" th:text="${i}">Текущий номер страницы</span>
+            </span>
+            <a th:if="${category.hasNext}" th:href="@{/categories(page=${category.currentPage+ 2})}">
+                Next
+            </a>
+            <span th:unless="${category.hasNext}">
+                Next
+            </span>
+        </div>
+    </div>
 </body>
 </html>

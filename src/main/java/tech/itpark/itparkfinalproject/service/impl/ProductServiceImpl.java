@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.itpark.itparkfinalproject.dto.ProductDto;
 import tech.itpark.itparkfinalproject.dto.pagination.ProductPageDto;
-import tech.itpark.itparkfinalproject.mapper.CategoryMapper;
 import tech.itpark.itparkfinalproject.mapper.ProductMapper;
 import tech.itpark.itparkfinalproject.model.Product;
 import tech.itpark.itparkfinalproject.repository.CategoryRepo;

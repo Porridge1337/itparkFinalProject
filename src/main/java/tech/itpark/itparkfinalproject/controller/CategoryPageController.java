@@ -24,10 +24,10 @@ public class CategoryPageController {
     private final CategoryService categoryService;
 
     @GetMapping("/categories")
-    public String getCategoryPage(@PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer page,
+    public String getCategoryPage(@PositiveOrZero @RequestParam(required = false, defaultValue = "1") Integer page,
                                   @Positive @RequestParam(required = false, defaultValue = "5") Integer size,
                                   Model model) {
-        CategoryPageDto categoryPageDto = categoryService.getPage(PageRequest.of(page, size));
+        CategoryPageDto categoryPageDto = categoryService.getPage(PageRequest.of(page-1, size));
         model.addAttribute("category", categoryPageDto);
         return "category/category";
     }
