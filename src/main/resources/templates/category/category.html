@@ -44,9 +44,7 @@
                 </td>
                 <td th:text="${cat.getAmount()}">Кол-во</td>
                 <td>
-                    <div th:if="${cat.productImagePath != null}">
-                        <img th:src="@{${cat.productImagePath}}" alt="no picture" width="156px" height="auto">
-                    </div>
+                    <img th:src="@{${cat.productImagePath}}" alt="no picture" width="156px" height="auto">
                 </td>
                 <td th:text="${cat.getDescription()}">Дискриптион</td>
                 <td>

@@ -30,8 +30,6 @@
             <input id="amount-of-category" name="amount" type="text">
         </div>
         <div >
-            <!-- <label for="pic-of-category">Выбор изображения</label>
-            <input id="pic-of-category" name="picture" type="text" >-->
             <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
             <p>
                 <img id = "thumbnail" alt="Category Preview"/>
@@ -59,11 +57,10 @@
             <input id="amount-of-category" th:field="${category.amount}" type="text">
         </div>
         <div >
-            <!-- <label for="pic-of-category">Выбор изображения</label>
-            <input id="pic-of-category" th:field="${category.picture}" type="text" >-->
             <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
             <p>
-                <img id = "thumbnail" alt="Category Preview"/>
+                <input type="hidden" th:field="${category.picture}" readonly="readonly">
+                <img id = "thumbnail" alt="Category Preview" th:src="@{${category.productImagePath}}"/>
             </p>
         </div>
         <div>

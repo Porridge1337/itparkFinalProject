@@ -57,23 +57,8 @@ public class CategoryPageController {
 
     @PostMapping("/category/save")
     public String save(CategoryDto categoryDto,
-                       @RequestParam("fileImage") MultipartFile multipartFile) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        categoryDto.setPicture(fileName);
-        CategoryDto savedCategory = categoryService.save(categoryDto);
-
-        String uploadDir = "./pictures/" + savedCategory.getCategoryName();
-        System.out.println(multipartFile.getOriginalFilename());
-        Path uploadPath = Paths.get(uploadDir);
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
-        }
-        try (InputStream inputStream = multipartFile.getInputStream()) {
-            Path filePath = uploadPath.resolve(fileName);
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            throw new IOException("Could not save uploaded file: " + fileName);
-        }
+                       @RequestParam("fileImage") MultipartFile multipartFile){
+        categoryService.save(categoryDto, multipartFile);
         return "redirect:/categories";
     }
 }
