@@ -32,7 +32,7 @@
         <div >
             <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
             <p>
-                <img id = "thumbnail" alt="Category Preview"/>
+                <img id = "thumbnail" alt="Category Preview"  width="156px" height="auto"/>
             </p>
         </div>
         <div>
@@ -60,7 +60,7 @@
             <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
             <p>
                 <input type="hidden" th:field="${category.picture}" readonly="readonly">
-                <img id = "thumbnail" alt="Category Preview" th:src="@{${category.productImagePath}}"/>
+                <img id = "thumbnail" alt="Category Preview" th:src="@{${category.productImagePath}}"  width="156px" height="auto"/>
             </p>
         </div>
         <div>
