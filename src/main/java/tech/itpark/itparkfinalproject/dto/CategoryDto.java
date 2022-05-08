@@ -28,7 +28,15 @@ public class CategoryDto {
 
     private Set<ProductDto> productTable;
 
-    public String getIdStr(){
+    public String getProductImagePath() {
+        if (categoryName == null || picture == null) {
+            return null;
+        }else {
+            return "/pictures/" + categoryName + "/" + picture;
+        }
+    }
+
+    public String getIdStr() {
         {
             return String.format("category_%s", id);
         }

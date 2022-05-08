@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Create or Update</title>
+    <script src="/webjars/jquery/3.6.0/jquery.js"></script>
+    <script>
+        $(function (){
+            $('#fileImage').change(function(){
+                var file = this.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (e){
+                    $('#thumbnail').attr('src',e.target.result);
+                    $('#thumbnail').css({'width': '156px', 'height': 'auto'});
+                }
+                reader.readAsDataURL(file);
+            })
+        });
+    </script>
 </head>
 <body>
-    <form th:method="POST" th:action="@{/category/save}" th:if="${category == null}" >
+    <form th:method="POST" th:action="@{/category/save}" th:if="${category == null}" enctype="multipart/form-data">
         <div >
             <label for="name-of-category">Имя категории:</label>
             <input id="name-of-category" name="categoryName" type="text">
@@ -15,8 +30,12 @@
             <input id="amount-of-category" name="amount" type="text">
         </div>
         <div >
-            <label for="pic-of-category">Выбор изображения</label>
-            <input id="pic-of-category" name="picture" type="text" >
+            <!-- <label for="pic-of-category">Выбор изображения</label>
+            <input id="pic-of-category" name="picture" type="text" >-->
+            <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
+            <p>
+                <img id = "thumbnail" alt="Category Preview"/>
+            </p>
         </div>
         <div>
             <label for="description-of-category">Описание</label>
@@ -27,7 +46,7 @@
             <button type="submit">Сохранить</button>
         </div>
     </form>
-    <form th:method="PATCH" th:action="@{/category/save}" th:unless="${category == null}" >
+    <form th:method="PATCH" th:action="@{/category/save}" th:unless="${category == null}" enctype="multipart/form-data">
         <div>
             <input id="id-of-category" th:field="${category.id}" readonly="readonly" type="hidden">
         </div>
@@ -40,8 +59,12 @@
             <input id="amount-of-category" th:field="${category.amount}" type="text">
         </div>
         <div >
-            <label for="pic-of-category">Выбор изображения</label>
-            <input id="pic-of-category" th:field="${category.picture}" type="text" >
+            <!-- <label for="pic-of-category">Выбор изображения</label>
+            <input id="pic-of-category" th:field="${category.picture}" type="text" >-->
+            <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
+            <p>
+                <img id = "thumbnail" alt="Category Preview"/>
+            </p>
         </div>
         <div>
             <label for="description-of-category">Описание</label>

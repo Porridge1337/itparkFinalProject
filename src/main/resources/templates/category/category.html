@@ -43,7 +43,11 @@
                     <span th:if="${cat.getProductTable().isEmpty()}" th:text="${cat.getCategoryName()}">Имя</span>
                 </td>
                 <td th:text="${cat.getAmount()}">Кол-во</td>
-                <td th:text="${cat.getPicture()}">Пик</td>
+                <td>
+                    <div th:if="${cat.productImagePath != null}">
+                        <img th:src="@{${cat.productImagePath}}" alt="no picture" width="156px" height="auto">
+                    </div>
+                </td>
                 <td th:text="${cat.getDescription()}">Дискриптион</td>
                 <td>
                     <a th:href="@{/category/{id}(id = ${cat.getId()})}">Обновить</a>

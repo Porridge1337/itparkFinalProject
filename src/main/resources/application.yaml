@@ -18,3 +18,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
   liquibase:
     change-log: 'classpath:db/changelog/changeLog.xml'
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
