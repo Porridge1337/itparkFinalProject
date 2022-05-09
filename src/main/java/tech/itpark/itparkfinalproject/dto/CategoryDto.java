@@ -29,10 +29,10 @@ public class CategoryDto {
     private Set<ProductDto> productTable;
 
     public String getProductImagePath() {
-        if (categoryName == null || picture == null) {
+        if (id == null || picture == null) {
             return null;
         }else {
-            return "/pictures/" + categoryName + "/" + picture;
+            return "/pictures/" + id + "/" + picture;
         }
     }
 

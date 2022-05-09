@@ -14,6 +14,7 @@ import tech.itpark.itparkfinalproject.mapper.CategoryMapper;
 import tech.itpark.itparkfinalproject.model.Category;
 import tech.itpark.itparkfinalproject.repository.CategoryRepo;
 import tech.itpark.itparkfinalproject.service.CategoryService;
+import tech.itpark.itparkfinalproject.util.PictureUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,7 +54,9 @@ public class CategoryServiceImpl implements CategoryService {
         if (!multipartFile.isEmpty()) {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             table.setPicture(fileName);
-            uploadPicture(multipartFile, table.getCategoryName(), fileName);
+            CategoryDto categoryDto = mapper.toDto(repo.save(mapper.toEntity(table)));
+            PictureUtil.uploadPicture(multipartFile, categoryDto.getId(), fileName);
+            return categoryDto;
         }
         return mapper.toDto(repo.save(mapper.toEntity(table)));
     }
@@ -64,17 +67,4 @@ public class CategoryServiceImpl implements CategoryService {
         repo.deleteById(id);
     }
 
-    private void uploadPicture(MultipartFile multipartFile, String categoryName, String fileName) throws IOException {
-        String uploadDir = "./pictures/" + categoryName;
-        Path uploadPath = Paths.get(uploadDir);
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
-        }
-        try (InputStream inputStream = multipartFile.getInputStream()) {
-            Path filePath = uploadPath.resolve(fileName);
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            throw new IOException("Could not save uploaded file: " + fileName);
-        }
-    }
 }
