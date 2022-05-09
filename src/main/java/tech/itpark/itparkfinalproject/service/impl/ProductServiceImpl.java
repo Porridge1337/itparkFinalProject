@@ -65,6 +65,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public ProductDto save(ProductDto productDto, String categoryId, MultipartFile multipartFile) {
         if (!multipartFile.isEmpty()) {
+            PictureUtil.deletePictures(productDto.getId());
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             productDto.setPicture(fileName);
             Product product = mapper.toEntity(productDto);
@@ -84,6 +85,4 @@ public class ProductServiceImpl implements ProductService {
     public void delete(String id) {
         repo.deleteById(id);
     }
-
-
 }

@@ -31,15 +31,15 @@ public class ProductDto {
 
     private CategoryDto categoryTable;
 
-    public String getProductImage(){
+    public String getProductImage() {
         if (productName == null || picture == null) {
             return null;
-        }else {
+        } else {
             return "/pictures/" + id + "/" + picture;
         }
     }
 
-    public String getIdStr(){
+    public String getIdStr() {
         {
             return String.format("product_%s", id);
         }

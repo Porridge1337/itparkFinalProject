@@ -1,5 +1,6 @@
 package tech.itpark.itparkfinalproject.util;
 
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,5 +26,10 @@ public class PictureUtil {
         } catch (IOException e) {
             throw new IOException("Could not save uploaded file: " + fileName);
         }
+    }
+
+    public static void deletePictures(String id) throws IOException {
+        Path path = Paths.get(UPLOAD_DIR + id );
+        FileSystemUtils.deleteRecursively(path);
     }
 }

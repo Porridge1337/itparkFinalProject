@@ -46,6 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     public CategoryDto save(CategoryDto table, MultipartFile multipartFile) {
         if (!multipartFile.isEmpty()) {
+            PictureUtil.deletePictures(table.getId());
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             table.setPicture(fileName);
             CategoryDto categoryDto = mapper.toDto(repo.save(mapper.toEntity(table)));
@@ -56,9 +57,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @SneakyThrows
     @Transactional
     public void delete(String id) {
         repo.deleteById(id);
+        PictureUtil.deletePictures(id);
     }
 
 }
