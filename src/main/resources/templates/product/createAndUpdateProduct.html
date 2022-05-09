@@ -3,39 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Create or update product</title>
+    <script src="/webjars/jquery/3.6.0/jquery.js"></script>
+    <script>
+        $(function (){
+            $('#fileImage').change(function(){
+                var file = this.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (e){
+                    $('#thumbnail').attr('src',e.target.result);
+                    $('#thumbnail').css({'width': '156px', 'height': 'auto'});
+                }
+                reader.readAsDataURL(file);
+            })
+        });
+    </script>
 </head>
 <body>
-<form th:method="POST" th:action="@{/category/{categoryName}/{idCategory}/save
-    (categoryName=${categoryName},idCategory=${idCategory})}"  th:if="${product == null}" >
-    <div>
-    </div>
-    <div>
-        <label for="name-of-product">Имя продукта:</label>
-        <input id="name-of-product" name="productName" type="text">
-    </div>
-    <div>
-        <label for="price-of-product">Цена</label>
-        <input id="price-of-product" name="price" type="text">
-    </div>
-    <div >
-        <label for="amount-of-product">Колличество</label>
-        <input id="amount-of-product" name ="amount" type="text">
-    </div>
-    <div >
-        <label for="pic-of-product">Выбор изображения</label>
-        <input id="pic-of-product" name="picture" type="text" >
-    </div>
-    <div>
-        <label for="description-of-product">Описание</label>
-        <textarea id="description-of-product" name="description"></textarea>
-    </div>
-    <div>
-        <a>Назад</a>
-        <button type="submit">Сохранить</button>
-    </div>
-</form>
+    <form th:method="POST" th:action="@{/category/{categoryName}/{idCategory}/save
+        (categoryName=${categoryName},idCategory=${idCategory})}"  th:if="${product == null}" enctype="multipart/form-data">
+        <div>
+        </div>
+        <div>
+            <label for="name-of-product">Имя продукта:</label>
+            <input id="name-of-product" name="productName" type="text">
+        </div>
+        <div>
+            <label for="price-of-product">Цена</label>
+            <input id="price-of-product" name="price" type="text">
+        </div>
+        <div >
+            <label for="amount-of-product">Колличество</label>
+            <input id="amount-of-product" name ="amount" type="text">
+        </div>
+        <div>
+           <!--  <label for="pic-of-product">Выбор изображения</label>
+            <input id="pic-of-product" name="picture" type="text" >-->
+            <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
+            <p>
+                <img id = "thumbnail" alt="Product Preview"  width="156px" height="auto"/>
+            </p>
+        </div>
+        <div>
+            <label for="description-of-product">Описание</label>
+            <textarea id="description-of-product" name="description"></textarea>
+        </div>
+        <div>
+            <a>Назад</a>
+            <button type="submit">Сохранить</button>
+        </div>
+    </form>
     <form th:method="PATCH" th:action="@{/category/{categoryName}/{idCategory}/save
-    (categoryName=${categoryName},idCategory=${idCategory})}" th:unless="${product == null}" >
+    (categoryName=${categoryName},idCategory=${idCategory})}" th:unless="${product == null}" enctype="multipart/form-data">
         <div>
             <input id="id-of-product" th:field="${product.id}" readonly="readonly" type="hidden">
         </div>
@@ -52,8 +71,11 @@
             <input id="amount-of-product" th:field="${product.amount}" type="text">
         </div>
         <div >
-            <label for="pic-of-product">Выбор изображения</label>
-            <input id="pic-of-product" th:field="${product.picture}" type="text" >
+            <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
+            <p>
+                <input type="hidden" th:field="${product.picture}" readonly="readonly">
+                <img id = "thumbnail" alt="Product Preview"  width="156px" height="auto"/>
+            </p>
         </div>
         <div>
             <label for="description-of-product">Описание</label>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import tech.itpark.itparkfinalproject.dto.ProductDto;
 import tech.itpark.itparkfinalproject.dto.pagination.ProductPageDto;
 import tech.itpark.itparkfinalproject.service.ProductService;
@@ -36,7 +37,10 @@ public class ProductPageController {
 
     @GetMapping("/category/{categoryName}/{idCategory}/create")
     public String getProductPageCreate(@PathVariable String categoryName,
-                                       @PathVariable String idCategory) {
+                                       @PathVariable String idCategory,
+                                       Model model) {
+        model.addAttribute("categoryName", categoryName);
+        model.addAttribute("idCategory", idCategory);
         return "product/createAndUpdateProduct";
     }
 
@@ -57,8 +61,9 @@ public class ProductPageController {
     @PostMapping("/category/{categoryName}/{idCategory}/save")
     public String save(ProductDto productDto,
                        @PathVariable String categoryName,
-                       @PathVariable String idCategory) {
-        productService.save(productDto, idCategory);
+                       @PathVariable String idCategory,
+                       @RequestParam("fileImage")MultipartFile multipartFile) {
+        productService.save(productDto, idCategory, multipartFile);
         return "redirect:/category/{categoryName}/{idCategory}";
     }
 
