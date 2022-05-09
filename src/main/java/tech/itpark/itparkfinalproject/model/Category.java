@@ -41,7 +41,6 @@ public class Category {
     private String categoryName;
 
     @Column(name = "amount", columnDefinition = "BIGINT")
-    @NotNull
     private BigInteger amount;
 
     @Column(name = "picture", columnDefinition = "TEXT")

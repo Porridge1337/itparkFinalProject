@@ -18,7 +18,6 @@ public class CategoryDto {
     @NotNull
     private String categoryName;
 
-    @NotNull
     private BigInteger amount;
 
     private String picture;

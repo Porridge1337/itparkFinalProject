@@ -74,7 +74,7 @@
             <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
             <p>
                 <input type="hidden" th:field="${product.picture}" readonly="readonly">
-                <img id = "thumbnail" alt="Product Preview"  width="156px" height="auto"/>
+                <img id = "thumbnail" alt="Product Preview"  width="156px" height="auto" th:src="@{${product.productImage}}"/>
             </p>
         </div>
         <div>
