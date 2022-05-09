@@ -67,7 +67,7 @@
         <span th:unless="${products.hasPrevious}">
                 Previous
             </span>
-        <span th:each="i: ${#numbers.sequence(1, products.totalPage)}">
+        <span th:unless="${products.getData().isEmpty()}" th:each="i: ${#numbers.sequence(1, products.totalPage)}">
                 <a th:if="${i!=products.currentPage + 1}" th:href="@{/category/{categoryName}/{idCategory}(categoryName=${categoryName},idCategory=${idCategory},
          page=${i})}" th:text="${i}">Номера страниц для перехода</a>
                 <span th:if="${i==products.currentPage + 1}" th:text="${i}">Текущий номер страницы</span>
