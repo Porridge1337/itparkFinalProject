@@ -20,7 +20,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="amount" type="BIGINT">
-                <constraints nullable="false"/>
             </column>
             <column name="picture" type="TEXT">
             </column>

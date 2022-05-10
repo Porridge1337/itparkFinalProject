@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -16,9 +17,11 @@ public class ProductDto {
     private String id;
 
     @NotNull
+    @NotBlank
     private String productName;
 
     @NotNull
+    @NotBlank
     private BigDecimal price;
 
     @NotNull
@@ -27,6 +30,7 @@ public class ProductDto {
     private String picture;
 
     @NotNull
+    @NotBlank
     private String description;
 
     private CategoryDto categoryTable;

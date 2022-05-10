@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 import java.util.Set;
@@ -23,6 +24,7 @@ public class CategoryDto {
     private String picture;
 
     @NotNull
+    @NotBlank
     private String description;
 
     private Set<ProductDto> productTable;
