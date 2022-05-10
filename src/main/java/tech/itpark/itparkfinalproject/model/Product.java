@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -37,10 +38,12 @@ public class Product {
 
     @Column(name = "product_name")
     @NotNull
+    @NotBlank
     private String productName;
 
     @Column(name = "price")
     @NotNull
+    @NotBlank
     private BigDecimal price;
 
     @Column(name = "amount", columnDefinition = "BIGINT")

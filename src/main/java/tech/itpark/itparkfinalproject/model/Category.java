@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 import java.util.Set;
@@ -38,6 +39,7 @@ public class Category {
 
     @Column(name = "category_name", unique = true)
     @NotNull
+    @NotBlank
     private String categoryName;
 
     @Column(name = "amount", columnDefinition = "BIGINT")
