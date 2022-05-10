@@ -1,9 +1,12 @@
 package tech.itpark.itparkfinalproject.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +17,14 @@ import tech.itpark.itparkfinalproject.dto.CategoryDto;
 import tech.itpark.itparkfinalproject.dto.pagination.CategoryPageDto;
 import tech.itpark.itparkfinalproject.service.CategoryService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 @Controller
 @RequiredArgsConstructor
-@Validated
+@Slf4j
+//@Validated
 public class CategoryPageController {
 
     private final CategoryService categoryService;
@@ -48,8 +53,15 @@ public class CategoryPageController {
     }
 
     @PostMapping("/category/save")
-    public String save(CategoryDto categoryDto,
-                       @RequestParam("fileImage") MultipartFile multipartFile){
+    public String save(@RequestParam("fileImage") MultipartFile multipartFile,
+                       @Valid CategoryDto categoryDto,
+                       BindingResult bindingResult,
+                       Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("category", categoryDto);
+            model.addAttribute("error", bindingResult.getFieldError().getDefaultMessage());
+            return "category/createAndUpdateCategory";
+        }
         categoryService.save(categoryDto, multipartFile);
         return "redirect:/categories";
     }

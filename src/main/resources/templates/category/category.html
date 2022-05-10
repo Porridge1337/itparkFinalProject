@@ -40,7 +40,6 @@
                     <a th:href="@{/category/{categoryName}/{idCategory}(categoryName=${cat.getCategoryName()}, idCategory=${cat.getId()})}" >
                         <span th:text="${cat.getCategoryName()}">Имя</span>
                     </a>
-                    <!--<span th:if="${cat.getProductTable().isEmpty()}" th:text="${cat.getCategoryName()}">Имя</span> -->
                 </td>
                 <td th:text="${cat.getProductTable().size()}">Кол-во</td>
                 <td>

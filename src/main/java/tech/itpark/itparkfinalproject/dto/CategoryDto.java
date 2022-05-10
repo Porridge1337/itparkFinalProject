@@ -17,6 +17,7 @@ public class CategoryDto {
     private String id;
 
     @NotNull
+    @NotBlank
     private String categoryName;
 
     private BigInteger amount;
@@ -24,7 +25,6 @@ public class CategoryDto {
     private String picture;
 
     @NotNull
-    @NotBlank
     private String description;
 
     private Set<ProductDto> productTable;
@@ -32,7 +32,7 @@ public class CategoryDto {
     public String getProductImagePath() {
         if (id == null || picture == null) {
             return null;
-        }else {
+        } else {
             return "/pictures/" + id + "/" + picture;
         }
     }

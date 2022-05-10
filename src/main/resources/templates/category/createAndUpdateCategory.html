@@ -24,6 +24,9 @@
         <div >
             <label for="name-of-category">Имя категории:</label>
             <input id="name-of-category" name="categoryName" type="text">
+            <label th:for="name-of-category" th:unless="${error==null} " th:text="${error}">
+                categoryName Error
+            </label>
         </div>
         <div >
             <input id="amount-of-category" name="amount" type="hidden" readonly="readonly">
@@ -43,13 +46,17 @@
             <button type="submit">Сохранить</button>
         </div>
     </form>
-    <form th:method="PATCH" th:action="@{/category/save}" th:unless="${category == null}" enctype="multipart/form-data">
+    <form th:method="PATCH" th:action="@{/category/save}" th:unless="${category == null}"
+          enctype="multipart/form-data">
         <div>
             <input id="id-of-category" th:field="${category.id}" readonly="readonly" type="hidden">
         </div>
         <div>
-            <label for="name-of-category">Имя категории:</label>
-            <input id="name-of-category" th:field="${category.categoryName}" type="text">
+            <label th:for="name-of-category">Имя категории:</label>
+            <input th:id="name-of-category" th:field="${category.categoryName}" type="text">
+            <label th:for="name-of-category" th:unless="${error==null} " th:text="${error}">
+                categoryName Error
+            </label>
         </div>
         <div >
             <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
