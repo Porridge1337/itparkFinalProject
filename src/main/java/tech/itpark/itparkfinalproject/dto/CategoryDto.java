@@ -17,7 +17,7 @@ public class CategoryDto {
     private String id;
 
     @NotNull
-    @NotBlank
+    @NotBlank(message = "имя категории не должно быть пустым")
     private String categoryName;
 
     private BigInteger amount;

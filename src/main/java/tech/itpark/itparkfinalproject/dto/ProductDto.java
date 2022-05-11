@@ -4,8 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -17,20 +21,20 @@ public class ProductDto {
     private String id;
 
     @NotNull
-    @NotBlank
+    @NotBlank(message = "имя продукта не должно быть пустым")
     private String productName;
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "указанная цена не должна быть пустой")
+    @DecimalMin(value = "0.0", message = "цена не должна быть ниже 0")
     private BigDecimal price;
 
-    @NotNull
+    @NotNull(message = "указанное колл-во не должно быть пустым")
+    @Min(value = 0, message = "колличество товара на складе не должно быть меньше нуля")
     private BigInteger amount;
 
     private String picture;
 
     @NotNull
-    @NotBlank
     private String description;
 
     private CategoryDto categoryTable;

@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +15,13 @@ import tech.itpark.itparkfinalproject.dto.ProductDto;
 import tech.itpark.itparkfinalproject.dto.pagination.ProductPageDto;
 import tech.itpark.itparkfinalproject.service.ProductService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 @Controller
 @RequiredArgsConstructor
+//@Validated
 public class ProductPageController {
 
     private final ProductService productService;
@@ -59,10 +63,17 @@ public class ProductPageController {
     }
 
     @PostMapping("/category/{categoryName}/{idCategory}/save")
-    public String save(ProductDto productDto,
+    public String save(@Valid ProductDto productDto,
+                       BindingResult bindingResult,
+                       @RequestParam("fileImage") MultipartFile multipartFile,
                        @PathVariable String categoryName,
                        @PathVariable String idCategory,
-                       @RequestParam("fileImage")MultipartFile multipartFile) {
+                       Model model) {
+        if (bindingResult.hasErrors()){
+            model.addAttribute("error", bindingResult.getFieldErrors());
+            model.addAttribute("product", productDto);
+            return "product/createAndUpdateProduct";
+        }
         productService.save(productDto, idCategory, multipartFile);
         return "redirect:/category/{categoryName}/{idCategory}";
     }

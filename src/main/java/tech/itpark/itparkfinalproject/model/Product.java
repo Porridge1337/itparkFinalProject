@@ -13,8 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -43,11 +46,11 @@ public class Product {
 
     @Column(name = "price")
     @NotNull
-    @NotBlank
+    @DecimalMin(value = "0.0", message = "цена должна быть указана")
     private BigDecimal price;
 
     @Column(name = "amount", columnDefinition = "BIGINT")
-    @NotNull
+    @Min(value = 0, message = "колличество должно быть указано")
     private BigInteger amount;
 
     @Column(name = "picture", columnDefinition = "TEXT")

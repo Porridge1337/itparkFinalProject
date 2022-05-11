@@ -47,7 +47,7 @@
             <textarea id="description-of-product" name="description"></textarea>
         </div>
         <div>
-            <a>Назад</a>
+            <a th:href="@{/category/{categoryName}/{idCategory}(categoryName=${categoryName},idCategory=${idCategory} )}">Назад</a>
             <button type="submit">Сохранить</button>
         </div>
     </form>
@@ -80,9 +80,12 @@
             <textarea id="description-of-product" th:field="${product.description}"></textarea>
         </div>
         <div>
-            <a>Назад</a>
+            <a th:href="@{/category/{categoryName}/{idCategory}(categoryName=${categoryName},idCategory=${idCategory} )}">Назад</a>
             <button type="submit">Сохранить</button>
         </div>
     </form>
+    <div th:each="errors:${error}">
+        <span th:text="${errors.getDefaultMessage()}"></span>
+    </div>
 </body>
 </html>
