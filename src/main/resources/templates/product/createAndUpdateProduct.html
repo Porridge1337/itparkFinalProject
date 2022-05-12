@@ -30,11 +30,11 @@
         </div>
         <div>
             <label for="price-of-product">Цена</label>
-            <input id="price-of-product" name="price" type="text">
+            <input id="price-of-product" name="price" type="number" pattern="[0-9]+">
         </div>
         <div >
             <label for="amount-of-product">Колличество</label>
-            <input id="amount-of-product" name ="amount" type="text">
+            <input id="amount-of-product" name ="amount" type="number" >
         </div>
         <div>
             <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
@@ -62,11 +62,11 @@
         </div>
         <div>
         <label for="price-of-product">Цена</label>
-        <input id="price-of-product" th:field="${product.price}" type="text">
+        <input id="price-of-product" th:field="${product.price}" type="number">
         </div>
         <div >
             <label for="amount-of-product">Колличество</label>
-            <input id="amount-of-product" th:field="${product.amount}" type="text">
+            <input id="amount-of-product" th:field="${product.amount}" type="number">
         </div>
         <div >
             <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg">
