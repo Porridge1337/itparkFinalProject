@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Category</title>
     <script src="/webjars/jquery/3.6.0/jquery.js"></script>
     <script>
-        $(function (){
+        $(function () {
             $("a[id^='category_']").click(function (event) {
                 if (confirm('Are you sure to delete this genre?')) {
                     let categoryCode = $(this).attr('name').replace('category_', '');
@@ -31,7 +32,7 @@
                 <th>Колличество</th>
                 <th>Изображение</th>
                 <th>Описание</th>
-                <th>Действие</th>
+                <th sec:authorize="hasAnyAuthority('ADMIN', 'MODER')">Действие</th>
             </tr>
         </thead>
         <tbody>
@@ -46,14 +47,14 @@
                     <img th:src="@{${cat.productImagePath}}" alt="no picture" width="156px" height="auto">
                 </td>
                 <td th:text="${cat.getDescription()}">Дискриптион</td>
-                <td>
+                <td sec:authorize="hasAnyAuthority('ADMIN', 'MODER')">
                     <a th:href="@{/category/{id}(id = ${cat.getId()})}">Обновить</a>
                     <a th:id="${cat.idStr}" th:name="${cat.idStr}" th:href="@{/categories(page=${category.currentPage})}">Удалить</a>
                 </td>
             </tr>
         </tbody>
     </table>
-    <div>
+    <div sec:authorize="hasAnyAuthority('ADMIN', 'MODER')">
         <a th:href="@{/category/create}">Добавить новую категорию</a>
     </div>
     <div>

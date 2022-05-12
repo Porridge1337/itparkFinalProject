@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Product</title>
     <script src="/webjars/jquery/3.6.0/jquery.js"></script>
     <script>
-        $(function (){
+        $(function () {
             $("a[id^='product_']").click(function (event) {
                 if (confirm('Are you sure to delete this genre?')) {
                     let productCode = $(this).attr('name').replace('product_', '');
@@ -32,7 +33,7 @@
         <th>Колличество</th>
         <th>Изображение</th>
         <th>Описание</th>
-        <th>Действие</th>
+        <th sec:authorize="hasAnyAuthority('ADMIN', 'MODER')">Действие</th>
     </tr>
     </thead>
     <tbody>
@@ -44,7 +45,7 @@
             <img th:src="@{${prod.productImage}}" alt="no picture" width="156px" height="auto">
         </td>
         <td th:text="${prod.description}">описание</td>
-        <td>
+        <td sec:authorize="hasAnyAuthority('ADMIN', 'MODER')">
             <a th:href="@{/category/{categoryName}/{idCategory}/{product}/{idProduct}(categoryName=${categoryName},
             idCategory=${idCategory},product=${prod.getProductName()},idProduct=${prod.getId()})}">Обновить</a>
             <a th:id="${prod.idStr}" th:name="${prod.idStr}" th:href="@{/category/{categoryName}/{idCategory}(categoryName=${categoryName},
@@ -53,7 +54,7 @@
     </tr>
     </tbody>
 </table>
-<div>
+<div sec:authorize="hasAnyAuthority('ADMIN', 'MODER')">
     <a th:href="@{/category/{categoryName}/{idCategory}/create(categoryName=${categoryName}, idCategory=${idCategory})}">
         Добавить новый продукт
     </a>
