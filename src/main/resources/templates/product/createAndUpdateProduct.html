@@ -30,7 +30,7 @@
         </div>
         <div>
             <label for="price-of-product">Цена</label>
-            <input id="price-of-product" name="price" type="number" pattern="[0-9]+">
+            <input id="price-of-product" name="price" type="number" step="0.01">
         </div>
         <div >
             <label for="amount-of-product">Колличество</label>
@@ -62,7 +62,7 @@
         </div>
         <div>
         <label for="price-of-product">Цена</label>
-        <input id="price-of-product" th:field="${product.price}" type="number">
+        <input id="price-of-product" th:field="${product.price}" type="number" step="0.01">
         </div>
         <div >
             <label for="amount-of-product">Колличество</label>
