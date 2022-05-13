@@ -35,22 +35,6 @@ public interface ProductMapper {
     })
     Product toEntity(ProductDto dto);
 
-   /* @Named("productTableDtoList")
-    default Set<ProductDto> toProductTableDto(Set<Product>source){
-        return source.stream()
-                .map(this::toDto)
-                .peek(dto -> dto.setCategoryTable(dto.getCategoryTable()))
-                .collect(Collectors.toSet());
-    }
-    @Named("productTableEntityList")
-    default Set<Product> toProductTableEntity(Set<ProductDto>source){
-        return source.stream()
-                .map(this::toEntity)
-                .peek(entity -> entity.setCategoryTable(entity.getCategoryTable()))
-                .collect(Collectors.toSet());
-    }*/
-
-
     default Optional<ProductDto> toOptionalDto(Optional<Product> entity) {
         return entity.map(this::toDto);
     }
