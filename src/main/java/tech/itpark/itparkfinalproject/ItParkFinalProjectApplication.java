@@ -15,10 +15,5 @@ public class ItParkFinalProjectApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(ItParkFinalProjectApplication.class, args);
-        /*UserService userBean = run.getBean(UserService.class);
-        UserDto userDto = new UserDto();
-        userDto.setPassword("123");
-        userDto.setLogin("123");
-        userBean.save(userDto);*/
     }
 }

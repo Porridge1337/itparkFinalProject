@@ -42,9 +42,6 @@ public class Category {
     @NotBlank
     private String categoryName;
 
-    @Column(name = "amount", columnDefinition = "BIGINT")
-    private BigInteger amount;
-
     @Column(name = "picture", columnDefinition = "TEXT")
     private String picture;
 

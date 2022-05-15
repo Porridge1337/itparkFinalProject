@@ -20,8 +20,6 @@ public class CategoryDto {
     @NotBlank(message = "имя категории не должно быть пустым")
     private String categoryName;
 
-    private BigInteger amount;
-
     private String picture;
 
     @NotNull

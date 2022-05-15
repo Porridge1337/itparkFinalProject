@@ -16,8 +16,6 @@
             <column name="category_name" type="VARCHAR(255)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="amount" type="BIGINT">
-            </column>
             <column name="picture" type="TEXT">
             </column>
             <column name="description" type="TEXT">
