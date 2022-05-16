@@ -22,7 +22,7 @@ public class CategoryRepositoryTest {
 
     @DisplayName(" должна уметь получать список категорий")
     @Test
-    public void shouldReturnCorrectAllGenreList() {
+    public void shouldReturnCorrectAllCategoryList() {
         Category category = new Category();
         category.setCategoryName("name");
         category.setDescription("description");
@@ -40,7 +40,7 @@ public class CategoryRepositoryTest {
 
     @DisplayName(" должна уметь получать нужную категорию по id")
     @Test
-    public void shouldReturnCorrectGenreById() {
+    public void shouldReturnCorrectCategoryById() {
         Category category = new Category();
         category.setCategoryName("name");
         category.setDescription("description");
@@ -53,9 +53,9 @@ public class CategoryRepositoryTest {
                 .hasFieldOrPropertyWithValue("id", id);
     }
 
-    @DisplayName(" Должна уметь создавать категории, а потом загружать информацию о нем")
+    @DisplayName(" Должна уметь создавать категории, а потом загружать информацию о них")
     @Test
-    public void shouldSaveAndLoadCorrectGenre() {
+    public void shouldSaveAndLoadCorrectCategory() {
         val expectedCategory = new Category();
         expectedCategory.setCategoryName("tst");
         expectedCategory.setPicture("pic.jpg");
@@ -66,7 +66,7 @@ public class CategoryRepositoryTest {
 
     @DisplayName(" должна уметь удалять категорию")
     @Test
-    public void shouldDeleteGenre() {
+    public void shouldDeleteCategory() {
         Category category = new Category();
         category.setCategoryName("name");
         category.setDescription("description");
@@ -79,8 +79,8 @@ public class CategoryRepositoryTest {
         newCategory.setDescription("description2");
         newCategory.setPicture("pic2.jpg");
 
-        val genre = categoryRepo.save(newCategory);
-        categoryRepo.delete(genre);
+        val newCategory1 = categoryRepo.save(newCategory);
+        categoryRepo.delete(newCategory1);
         val categoryCountAfter = categoryRepo.findAll().size();
 
         assertThat(categoryCountBefore).isEqualTo(categoryCountAfter);
