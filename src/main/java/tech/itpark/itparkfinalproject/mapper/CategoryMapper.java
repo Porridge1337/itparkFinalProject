@@ -13,22 +13,22 @@ import java.util.stream.Collectors;
 @Mapper(uses = ProductMapper.class)
 public interface CategoryMapper {
 
-   // @Mappings({
-            @Mapping(target = "id", source = "entity.id")
-            @Mapping(target = "categoryName", source = "entity.categoryName")
-            @Mapping(target = "picture", source = "entity.picture")
-            @Mapping(target = "description", source = "entity.description")
-            @Mapping(target = "productTable", source = "entity.productTable"/*, qualifiedByName = "productTableDtoList"*/)
-    //})
+    @Mappings({
+            @Mapping(target = "id", source = "entity.id"),
+            @Mapping(target = "categoryName", source = "entity.categoryName"),
+            @Mapping(target = "picture", source = "entity.picture"),
+            @Mapping(target = "description", source = "entity.description"),
+            @Mapping(target = "productTable", source = "entity.productTable")
+    })
     CategoryDto toDto(Category entity);
 
-    //@Mappings({
-            @Mapping(target = "id", source = "dto.id")
-            @Mapping(target = "categoryName", source = "dto.categoryName")
-            @Mapping(target = "picture", source = "dto.picture")
-            @Mapping(target = "description", source = "dto.description")
-            @Mapping(target = "productTable", source = "dto.productTable"/*, qualifiedByName = "productTableEntityList"*/)
-    //})
+    @Mappings({
+            @Mapping(target = "id", source = "dto.id"),
+            @Mapping(target = "categoryName", source = "dto.categoryName"),
+            @Mapping(target = "picture", source = "dto.picture"),
+            @Mapping(target = "description", source = "dto.description"),
+            @Mapping(target = "productTable", source = "dto.productTable")
+    })
     Category toEntity(CategoryDto dto);
 
     default Optional<CategoryDto> toOptionalDto(Optional<Category> entity) {
