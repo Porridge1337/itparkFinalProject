@@ -42,7 +42,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductPageDto getPageByCategoryId(String id, Pageable pageable) {
         Page<Product> productPage = repo.findProductByCategoryId(id, pageable);
-
         return new ProductPageDto(mapper.toDtos(productPage.getContent()),
                 productPage.getNumber(),
                 productPage.getTotalPages(),
