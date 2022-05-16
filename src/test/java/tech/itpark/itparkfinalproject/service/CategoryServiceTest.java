@@ -33,11 +33,31 @@ public class CategoryServiceTest {
     private CategoryRepo repo;
 
     @Test
-    @DisplayName("ументь находить продукт по id")
+    @DisplayName("ументь выдавать страницу с данными")
+    public void testGetPage() {
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setId("123");
+        categoryDto.setCategoryName("Category");
+        categoryDto.setPicture("pic.jpg");
+        categoryDto.setDescription("contains products");
+
+        Page<Category> categoryPage = new PageImpl(List.of(mapper.toEntity(categoryDto)));
+        CategoryPageDto categoryPageDto = new CategoryPageDto(List.of(categoryDto),
+                0,
+                1,
+                false,
+                false);
+
+        when(repo.findAll(PageRequest.of(0, 1))).thenReturn(categoryPage);
+        Assertions.assertEquals(categoryPageDto.getData(), categoryService.getPage(PageRequest.of(0, 1)).getData());
+    }
+
+    @Test
+    @DisplayName("ументь находить категорию по id")
     public void testFindCategoryById() {
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setId("123");
-        categoryDto.setCategoryName("Products");
+        categoryDto.setCategoryName("Category");
         categoryDto.setPicture("pic.jpg");
         categoryDto.setDescription("contains products");
 
@@ -50,7 +70,7 @@ public class CategoryServiceTest {
     public void testDeleteCategory() {
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setId("123");
-        categoryDto.setCategoryName("Products");
+        categoryDto.setCategoryName("Category");
         categoryDto.setPicture("pic.jpg");
         categoryDto.setDescription("contains products");
 
@@ -64,31 +84,11 @@ public class CategoryServiceTest {
     public void testSaveAndUpdateCategory() {
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setId("123");
-        categoryDto.setCategoryName("Products");
+        categoryDto.setCategoryName("Category");
         categoryDto.setPicture("pic.jpg");
         categoryDto.setDescription("contains products");
         MockMultipartFile firstFile = new MockMultipartFile("test", (byte[]) null);
         when(repo.save(mapper.toEntity(categoryDto))).thenReturn(mapper.toEntity(categoryDto));
         Assertions.assertEquals(categoryService.save(categoryDto, firstFile), categoryDto);
-    }
-
-    @Test
-    @DisplayName("ументь выдавать страницу с данными")
-    public void testGetPage() {
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setId("123");
-        categoryDto.setCategoryName("Products");
-        categoryDto.setPicture("pic.jpg");
-        categoryDto.setDescription("contains products");
-
-        Page<Category> categoryPage = new PageImpl(List.of(mapper.toEntity(categoryDto)));
-        CategoryPageDto categoryPageDto = new CategoryPageDto(List.of(categoryDto),
-                0,
-                1,
-                false,
-                false);
-
-        when(repo.findAll(PageRequest.of(0, 1))).thenReturn(categoryPage);
-        Assertions.assertEquals(categoryPageDto.getData(), categoryService.getPage(PageRequest.of(0, 1)).getData());
     }
 }

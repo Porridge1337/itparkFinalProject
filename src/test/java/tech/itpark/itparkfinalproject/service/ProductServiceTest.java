@@ -171,6 +171,7 @@ public class ProductServiceTest {
         when(repo.findById("123")).thenReturn(Optional.of(mapper.toEntity(productDto)));
         when(repo.existsById(productDto.getId())).thenReturn(false);
         Assertions.assertFalse(repo.existsById(productDto.getId()));
+
     }
 
 }
