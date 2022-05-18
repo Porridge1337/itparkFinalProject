@@ -21,7 +21,6 @@ import tech.itpark.itparkfinalproject.service.ProductService;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.Set;
 
 @DisplayName("Кнтроллер для работы с продуктами должен ")
 @WebMvcTest(ProductPageController.class)

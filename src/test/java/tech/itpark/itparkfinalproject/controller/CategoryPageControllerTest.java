@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import tech.itpark.itparkfinalproject.dto.CategoryDto;
 import tech.itpark.itparkfinalproject.dto.ProductDto;
 import tech.itpark.itparkfinalproject.dto.pagination.CategoryPageDto;
-import tech.itpark.itparkfinalproject.repository.CategoryRepo;
 import tech.itpark.itparkfinalproject.service.CategoryService;
 
 import java.math.BigDecimal;
