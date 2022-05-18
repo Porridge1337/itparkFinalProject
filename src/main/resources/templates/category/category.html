@@ -25,6 +25,11 @@
     </script>
 </head>
 <body>
+<div sec:authorize="isAuthenticated()">
+    Welcome <b><span sec:authentication="name">Username</span></b>
+    &nbsp;
+    <i><span sec:authentication="principal.authorities">Roles</span></i>
+</div>
     <table>
         <thead>
             <tr>
@@ -76,6 +81,9 @@
                 Next
             </span>
         </div>
+    </div>
+    <div>
+        <a th:href="@{/}">Вернуться на приветственную страницу</a>
     </div>
 </body>
 </html>
