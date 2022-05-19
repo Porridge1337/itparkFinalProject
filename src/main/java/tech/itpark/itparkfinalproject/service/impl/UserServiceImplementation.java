@@ -32,4 +32,9 @@ public class UserServiceImplementation implements UserService {
         userDto.setPassword(encrypt);
         return userMapper.toDto(userRepository.save(userMapper.toEntity(userDto)));
     }
+
+    @Override
+    public boolean existByLogin(String login) {
+        return userRepository.existsByLogin(login);
+    }
 }

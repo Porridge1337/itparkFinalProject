@@ -5,5 +5,6 @@ import tech.itpark.itparkfinalproject.dto.security.UserDto;
 public interface UserService {
 
     UserDto save(UserDto userDto);
+    boolean existByLogin(String login);
 
 }
