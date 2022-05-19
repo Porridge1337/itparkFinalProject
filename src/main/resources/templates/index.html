@@ -9,8 +9,11 @@
     <div>
         <h1>Склад</h1>
         <p>Чтобы начать работу со складом - зарегистрируйтесь или авторизируйтесь</p>
+    </div>
+    <div>
         <a th:href="@{/categories}">Перейти к основному меню</a>
         <a th:href="@{/logout}" sec:authorize="isAuthenticated()">logout</a>
+        <a th:href="@{/registration}" sec:authorize="!isAuthenticated()">Регестрация</a>
     </div>
 </body>
 </html>
