@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import tech.itpark.itparkfinalproject.dto.security.UserDto;
 import tech.itpark.itparkfinalproject.service.UserService;
+import tech.itpark.itparkfinalproject.util.UserValidator;
 
 import javax.validation.Valid;
 
@@ -16,9 +17,10 @@ import javax.validation.Valid;
 public class RegistrationController {
 
     private final UserService userService;
+    private final UserValidator userValidator;
 
     @GetMapping("/registration")
-    public String getRegistrationPage(Model model) {
+    public String getRegistrationPage() {
         return "registration/registrationPage";
     }
 
@@ -27,6 +29,7 @@ public class RegistrationController {
     public String save(@Valid UserDto userDto,
                        BindingResult bindingResult,
                        Model model) {
+        userValidator.validate(userDto, bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute(userDto);
             model.addAttribute("errors", bindingResult.getFieldErrors());
