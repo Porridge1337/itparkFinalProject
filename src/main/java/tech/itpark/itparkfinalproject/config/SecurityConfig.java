@@ -36,6 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/category/{categoryName}/{idCategory}").authenticated()
                 .antMatchers("/category/{id}/**").hasAnyAuthority("ADMIN", "MODER")
                 .antMatchers("/category/{categoryName}/{idCategory}/{product}/{idProduct}").hasAnyAuthority("ADMIN", "MODER")
+                .antMatchers("/registration/**").anonymous()
+                .antMatchers("/login/**").anonymous()
                 .and()
                 .formLogin()
                 .and()
